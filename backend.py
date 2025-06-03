@@ -19,7 +19,7 @@ class PlantFinder:
         genai.configure(api_key=self.api_key)
         self.project_id = PROJECT_ID
         self.user_input = "test"
-        self.model = genai.GenerativeModel('gemini-1.5-flash',
+        self.model = genai.GenerativeModel('gemini-2.0-flash',
                                     generation_config=self.model_config)
  
     def get_response(self, image_path):
