@@ -1,8 +1,8 @@
 from openai import OpenAI
 import base64
+from dotenv import load_dotenv
 
-OPENAI_API_KEY = 'your_api_key'
-PROJECT_ID = 'your_project_id'
+load_dotenv(override=True)
  
 # Back-End
 class PlantFinder:
@@ -12,10 +12,7 @@ class PlantFinder:
         self.project_id = project_id
         self.user_input = "test"
 
-        self.client = OpenAI(
-                    api_key=OPENAI_API_KEY,
-                    base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
-
+        self.client = OpenAI()
 
     def encode_image(self, image_path):
         with open(image_path, "rb") as image_file:
@@ -29,7 +26,7 @@ class PlantFinder:
         prompt = "Identify this plant."
 
         response = self.client.chat.completions.create(
-            model="gemini-2.0-flash",
+            model="gpt-4o-mini",
             messages=[
                 {
                   "role": "user",
@@ -53,7 +50,7 @@ class PlantFinder:
 
 
 if __name__ == "__main__":
-    plantfinder = PlantFinder(api_key=OPENAI_API_KEY, project_id=PROJECT_ID)
+    plantfinder = PlantFinder(api_key="", project_id="")
     plant_info = plantfinder.get_response("plant.jpg")
 
     if plant_info:
