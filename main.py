@@ -1,11 +1,14 @@
 from PyQt6.QtWidgets import QApplication, QLineEdit, QPushButton, QMainWindow, QTextEdit
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtGui import QFont
-import sys
+from dotenv import load_dotenv
+import sys, os
 from backend import PlantFinder
 import threading
- 
-API_KEY = 'your_api_key'
+
+load_dotenv(override=True)
+
+API_KEY = os.getenv("GEMINI_API_KEY")
 PROJECT_ID = 'your_project_id'
  
 # Front-End
