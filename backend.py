@@ -1,7 +1,6 @@
 import google.generativeai as genai
- 
-API_KEY = 'your_api_key'
-PROJECT_ID = 'your_project_id'
+from dotenv import load_dotenv
+import os
  
 # Back-End
 
@@ -19,7 +18,7 @@ class PlantFinder:
         genai.configure(api_key=self.api_key)
         self.project_id = project_id
         self.user_input = "test"
-        self.model = genai.GenerativeModel('gemini-2.0-flash',
+        self.model = genai.GenerativeModel('gemini-2.5-flash',
                                     generation_config=self.model_config)
  
     def get_response(self, image_path):
@@ -39,7 +38,9 @@ class PlantFinder:
         return response.text
  
 if __name__ == "__main__":
-    plantfinder = PlantFinder(api_key=API_KEY, project_id=PROJECT_ID)
+    load_dotenv(override=True)
+    google_api_key = os.getenv("GOOGLE_API_KEY")
+    plantfinder = PlantFinder(api_key=google_api_key, project_id="")
     plant_info = plantfinder.get_response("plant.jpg")
 
     if plant_info:
